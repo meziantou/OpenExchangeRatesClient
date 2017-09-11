@@ -5,6 +5,7 @@
 Nuget: [Meziantou.OpenExchangeRatesClient](https://www.nuget.org/packages/Meziantou.OpenExchangeRatesClient/)
 
 ````csharp
+// using Meziantou.OpenExchangeRates;
 using (var client = new OpenExchangeRatesClient())
 {
     client.AppId = apiKey; // TODO set your api key
