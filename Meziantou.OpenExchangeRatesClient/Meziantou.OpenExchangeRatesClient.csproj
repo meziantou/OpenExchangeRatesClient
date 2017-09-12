@@ -6,6 +6,7 @@
     <Company>Meziantou</Company>
     <Description>Open Exchange Rates API client for .NET.</Description>
     <PackageProjectUrl>https://github.com/meziantou/OpenExchangeRatesClient</PackageProjectUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   
   <ItemGroup Condition="'$(TargetFramework)'=='net461'">

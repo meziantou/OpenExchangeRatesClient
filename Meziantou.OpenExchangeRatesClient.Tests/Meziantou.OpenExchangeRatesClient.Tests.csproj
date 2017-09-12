@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <RootNamespace>Meziantou.OpenExchangeRates.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ApiResponses\currencies.json_prettyprint=0_show_alternative=0.json" />
+    <None Remove="ApiResponses\usage.json_prettyprint=0.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ApiResponses\currencies.json_prettyprint=0_show_alternative=0.json" />
+    <EmbeddedResource Include="ApiResponses\historical_2001-02-16.json_prettyprint=0_show_alternative=0.json" />
+    <EmbeddedResource Include="ApiResponses\latest.json_prettyprint=0_show_alternative=0.json" />
+    <EmbeddedResource Include="ApiResponses\usage.json_prettyprint=0.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Meziantou.OpenExchangeRatesClient\Meziantou.OpenExchangeRatesClient.csproj" />
+  </ItemGroup>
+
+</Project>

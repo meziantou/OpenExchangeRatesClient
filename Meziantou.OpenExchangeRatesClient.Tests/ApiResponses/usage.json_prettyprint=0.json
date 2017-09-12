@@ -1,0 +1,27 @@
+﻿{
+  "status": 200,
+  "data": {
+    "app_id": "YOUR_APP_ID",
+    "status": "active",
+    "plan": {
+      "name": "Enterprise",
+      "quota": "100,000 requests/month",
+      "update_frequency": "30-minute",
+      "features": {
+        "base": true,
+        "symbols": true,
+        "experimental": true,
+        "time-series": true,
+        "convert": false
+      }
+    },
+    "usage": {
+      "requests": 54524,
+      "requests_quota": 100000,
+      "requests_remaining": 45476,
+      "days_elapsed": 16,
+      "days_remaining": 14,
+      "daily_average": 2842
+    }
+  }
+}
