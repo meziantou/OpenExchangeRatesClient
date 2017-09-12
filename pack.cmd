@@ -1,0 +1,1 @@
+dotnet pack Meziantou.OpenExchangeRatesClient\Meziantou.OpenExchangeRatesClient.csproj -c Release -o ..
