@@ -1,34 +1,33 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Meziantou.OpenExchangeRates.Tests
 {
     [TestClass]
-    public class OpenExchangeRatesClientTests
+    public class OpenExchangeRatesClientIntegrationTests
     {
-        private TestMessageHandler _handler;
-        private HttpClient _httpClient;
+        private const string AppId = "";
+
         private OpenExchangeRatesClient _openExchangeRatesClient;
 
         [TestInitialize]
         public void Initialize()
         {
-            _handler = new TestMessageHandler();
-            _httpClient = new HttpClient(_handler);
-            _httpClient.BaseAddress = new Uri(TestMessageHandler.Host);
-            _openExchangeRatesClient = new OpenExchangeRatesClient(_httpClient);
+            if (string.IsNullOrEmpty(AppId))
+            {
+                Assert.Inconclusive("AppId is not set");
+            }
+
+            _openExchangeRatesClient = new OpenExchangeRatesClient();
+            _openExchangeRatesClient.AppId = AppId;
         }
 
         [TestCleanup]
         public void CleanUp()
         {
             _openExchangeRatesClient?.Dispose();
-            _httpClient?.Dispose();
-            _handler?.Dispose();
         }
 
         [TestMethod]
@@ -36,7 +35,7 @@ namespace Meziantou.OpenExchangeRates.Tests
         {
             var response = await _openExchangeRatesClient.GetExchangeRatesAsync();
             Assert.AreEqual("USD", response.Base);
-            Assert.AreEqual(66.809999m, response.Rates["AFN"]);
+            Assert.IsTrue(response.Rates["AFN"] > 0);
         }
 
         [TestMethod]
@@ -49,31 +48,23 @@ namespace Meziantou.OpenExchangeRates.Tests
             Assert.AreEqual(2, response.Timestamp.Month);
             Assert.AreEqual(16, response.Timestamp.Day);
             Assert.AreEqual("USD", response.Base);
-            Assert.AreEqual(3.672538m, response.Rates["AED"]);
+            Assert.IsTrue(response.Rates["AED"] > 0);
         }
 
         [TestMethod]
         public async Task OpenExchangeRatesClient_Currencies()
         {
-            var response = await _openExchangeRatesClient.GetCurrenciesAsync();
-            Assert.AreEqual(3, response.Count);
-
-            var collection = new List<Currency>()
-            {
-                new Currency("AED", "United Arab Emirates Dirham"),
-                new Currency("AFN", "Afghan Afghani"),
-                new Currency("ALL", "Albanian Lek")
-            };
-
-            CollectionAssert.AreEquivalent(collection, response.ToList());
+            var response = (await _openExchangeRatesClient.GetCurrenciesAsync()).ToList();
+            var codes = response.Select(c => c.Code).ToList();
+            CollectionAssert.Contains(codes, "EUR");
+            CollectionAssert.Contains(codes, "USD");
         }
 
         [TestMethod]
         public async Task OpenExchangeRatesClient_Usage()
         {
             var response = await _openExchangeRatesClient.GetUsageAsync();
-            Assert.AreEqual(1000, response.Usage.RequestsRemaining);
-            Assert.AreEqual("Enterprise", response.Plan.Name);
+            Assert.IsTrue(response.Usage.RequestsRemaining >= 0);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Meziantou.OpenExchangeRates
 {
     public class OpenExchangeRatesClient : IDisposable
     {
-        private const string ApiBaseUrl = "https://openexchangerates.org/api";
+        private const string ApiBaseUrl = "https://openexchangerates.org/api/";
         private readonly HttpClient _client;
         private readonly bool _clientOwned;
 
@@ -45,7 +45,7 @@ namespace Meziantou.OpenExchangeRates
         /// <returns></returns>
         public async Task<IReadOnlyList<Currency>> GetCurrenciesAsync(bool showAlternative = false)
         {
-            var str = await _client.GetStringAsync($"/currencies.json?prettyprint=0&show_alternative={ToBoolean(showAlternative)}").ConfigureAwait(false);
+            var str = await _client.GetStringAsync($"currencies.json?prettyprint=0&show_alternative={ToBoolean(showAlternative)}").ConfigureAwait(false);
             if (str == null)
                 return null;
 
@@ -66,7 +66,7 @@ namespace Meziantou.OpenExchangeRates
         /// <returns></returns>
         public async Task<ExchangeRatesResponse> GetExchangeRatesAsync(bool showAlternative = false, string @base = null, string symbols = null)
         {
-            var url = $"/latest.json?app_id={AppId}&prettyprint=0&show_alternative={ToBoolean(showAlternative)}";
+            var url = $"latest.json?app_id={AppId}&prettyprint=0&show_alternative={ToBoolean(showAlternative)}";
             if (@base != null)
             {
                 url += "base=" + @base;
@@ -92,7 +92,7 @@ namespace Meziantou.OpenExchangeRates
         /// <returns></returns>
         public async Task<ExchangeRatesResponse> GetExchangeRatesAsync(DateTime date, bool showAlternative = false, string @base = null, string symbols = null)
         {
-            string url = $"/historical/{date:yyyy-MM-dd}.json?app_id={AppId}&prettyprint=0&show_alternative={ToBoolean(showAlternative)}";
+            string url = $"historical/{date:yyyy-MM-dd}.json?app_id={AppId}&prettyprint=0&show_alternative={ToBoolean(showAlternative)}";
             if (@base != null)
             {
                 url += "base=" + @base;
@@ -118,7 +118,7 @@ namespace Meziantou.OpenExchangeRates
         /// <returns></returns>
         public async Task<Stream> DownloadExchangeRatesAsync(DateTime date, bool showAlternative = false, string @base = null, string symbols = null)
         {
-            string url = $"/historical/{date:yyyy-MM-dd}.json?app_id={AppId}&prettyprint=0&show_alternative={ToBoolean(showAlternative)}";
+            string url = $"historical/{date:yyyy-MM-dd}.json?app_id={AppId}&prettyprint=0&show_alternative={ToBoolean(showAlternative)}";
             if (@base != null)
             {
                 url += "base=" + @base;
@@ -141,7 +141,7 @@ namespace Meziantou.OpenExchangeRates
         /// <returns></returns>
         public async Task<UserData> GetUsageAsync()
         {
-            var str = await _client.GetStringAsync($"/usage.json?app_id={AppId}&prettyprint=0").ConfigureAwait(false);
+            var str = await _client.GetStringAsync($"usage.json?app_id={AppId}&prettyprint=0").ConfigureAwait(false);
             if (str == null)
                 return null;
 
