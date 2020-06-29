@@ -69,11 +69,11 @@ namespace Meziantou.OpenExchangeRates
             var url = $"latest.json?app_id={AppId}&prettyprint=0&show_alternative={ToBoolean(showAlternative)}";
             if (@base != null)
             {
-                url += "base=" + @base;
+                url += "&base=" + @base;
             }
             if (symbols != null)
             {
-                url += "symbols=" + symbols;
+                url += "&symbols=" + symbols;
             }
 
             var str = await _client.GetStringAsync(url).ConfigureAwait(false);
@@ -95,11 +95,11 @@ namespace Meziantou.OpenExchangeRates
             string url = $"historical/{date:yyyy-MM-dd}.json?app_id={AppId}&prettyprint=0&show_alternative={ToBoolean(showAlternative)}";
             if (@base != null)
             {
-                url += "base=" + @base;
+                url += "&base=" + @base;
             }
             if (symbols != null)
             {
-                url += "symbols=" + symbols;
+                url += "&symbols=" + symbols;
             }
 
             var str = await _client.GetStringAsync(url).ConfigureAwait(false);
@@ -121,11 +121,11 @@ namespace Meziantou.OpenExchangeRates
             string url = $"historical/{date:yyyy-MM-dd}.json?app_id={AppId}&prettyprint=0&show_alternative={ToBoolean(showAlternative)}";
             if (@base != null)
             {
-                url += "base=" + @base;
+                url += "&base=" + @base;
             }
             if (symbols != null)
             {
-                url += "symbols=" + symbols;
+                url += "&symbols=" + symbols;
             }
 
             var stream = await _client.GetStreamAsync(url).ConfigureAwait(false);
