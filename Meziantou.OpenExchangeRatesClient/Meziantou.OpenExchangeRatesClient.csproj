@@ -7,7 +7,7 @@
     <Description>Open Exchange Rates API client for .NET.</Description>
     <PackageProjectUrl>https://github.com/meziantou/OpenExchangeRatesClient</PackageProjectUrl>
     <Version>1.0.3</Version>
-    <PackageLicenseUrl>https://github.com/meziantou/OpenExchangeRatesClient/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/meziantou/OpenExchangeRatesClient</RepositoryUrl>
     <PackageTags>OpenExchangeRates</PackageTags>
   </PropertyGroup>
